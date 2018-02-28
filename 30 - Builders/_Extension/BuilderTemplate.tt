@@ -1,0 +1,50 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using System;
+using System.Collections.Generic;
+
+namespace <#= Namespace #>
+{
+    public class <#= ClassName #>Builder
+    {
+<#  
+    foreach (var member in Members)
+    { #>
+
+        public <#= member.Type #> <#= member.Name #> { get; set; }
+
+        public <#= ClassName #>Builder Set<#= member.Name #>(<#= member.Type #> value)
+        {
+            this.<#= member.Name #> = value;
+            return this;
+        }
+
+<#
+    } // foreach member
+    #>
+
+        public <#= ClassName #> To<#= ClassName #>()
+        {
+            return new <#= ClassName #>(this);
+        }
+
+    } // Builder
+
+    public partial class <#= ClassName #>
+    {
+        public <#= ClassName #>(<#= ClassName #>Builder builder)
+        {
+            <#=
+            
+            string.Join(
+                "\r\n            ",
+                Members
+                .Select(x => $"this.{x.Name} = builder.{x.Name};"))
+
+            #>
+        }
+    }
+}

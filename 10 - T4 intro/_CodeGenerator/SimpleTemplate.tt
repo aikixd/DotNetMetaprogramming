@@ -1,0 +1,36 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using System;
+
+namespace App
+{
+    public class Program
+    {
+        public static void Main(string args)
+        {
+<#  // Standard control block
+    for (var i = 0; i < Limit; i += 1)
+    { #>
+            Console.WriteLine("<#= /* Expression block */ i #> is <#= oddOrEven(i) #>");
+<#  } // for (var i = 0; i < Limit; i += 1)
+#>
+            Console.ReadKey();
+        }
+
+    }
+
+}
+
+<#+
+
+// Class feature block
+
+string oddOrEven(int i)
+{
+    return i % 2 == 0 ? "Even" : "Odd";
+}
+
+#>

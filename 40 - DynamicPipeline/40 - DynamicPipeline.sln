@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2020
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "40 - DynamicPipeline", "40 - DynamicPipeline\40 - DynamicPipeline.csproj", "{A2252E4B-A3B3-4B66-975A-7574D25C018E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A2252E4B-A3B3-4B66-975A-7574D25C018E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2252E4B-A3B3-4B66-975A-7574D25C018E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2252E4B-A3B3-4B66-975A-7574D25C018E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2252E4B-A3B3-4B66-975A-7574D25C018E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {275DEDD6-39E5-4406-83FF-C4439FACBAA3}
+	EndGlobalSection
+EndGlobal

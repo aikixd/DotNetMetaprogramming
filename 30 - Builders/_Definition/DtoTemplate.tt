@@ -1,0 +1,46 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+
+using System;
+using System.Collections.Generic;
+
+namespace App
+{
+    public partial class <#= Model.Name #>Dto
+    {
+<#  foreach (var member in Model.Members)
+    { #>
+        public <#= member.Type #> <#= member.Name #> { get; set; }
+<#  } #>        
+
+        public <#= Model.Name #> ToModel()
+        {
+            return new <#= Model.Name #>Builder()
+<#  foreach (var member in Model.Members)
+    { #>
+                .Set<#= member.Name #>(this.<#= member.Name #>)
+<#  } #>
+                .To<#= Model.Name #>();
+        }
+    }
+
+    public partial class <#= Model.Name #>
+    {
+
+        public <#= Model.Name #>Dto ToDto()
+        {
+            return new <#= Model.Name #>Dto
+            {
+                <#= 
+                string.Join(
+                    ",\r\n                ",
+                    Model.Members.Select(x => $"{x.Name} = this.{x.Name}"))
+                #>
+            };
+        }
+        
+    }
+}

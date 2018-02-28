@@ -1,0 +1,65 @@
+﻿<#@ template language="C#" #>
+<#@ import namespace="System.Linq" #>
+<#@ import namespace="System.Text" #>
+<#@ import namespace="System.Collections.Generic" #>
+
+using System;
+using System.Collections.Generic;
+
+namespace App
+{
+    public partial class <#= Model.Name #> : IEquatable<<#= Model.Name #>>
+    {
+
+<#  foreach (var member in Model.Members)
+    { #>
+        <#= member.Visibility.ToString().ToLower() #> <#= member.Type #> <#= member.Name #> { get; <# if (member.Mutable) Write("set;"); #> }
+<#  } #>
+        
+        public bool Equals(<#= Model.Name #> other)
+        {
+            return 
+                <#= 
+        
+            string.Join(
+                " &&\r\n                ",
+                Model.Members
+                .Select(x => "this." + x.Name + ".Equals(other." + x.Name + ")"))
+        
+            #>;
+        }
+
+        public override int GetHashCode()
+        {
+            int i = 0;
+            
+            unchecked
+            {
+<#              foreach (var m in Model.Members)
+                { #>                    
+                i += this.<#= m.Name #>.GetHashCode();
+<#              } #>
+            }
+
+            return i;
+        }
+        
+        public static bool operator == (<#= Model.Name #> left, <#= Model.Name #> right)
+        {
+            return left.Equals(right);
+        }
+
+        public static bool operator != (<#= Model.Name #> left, <#= Model.Name #> right)
+        {
+            return !left.Equals(right);
+        }
+
+        public override bool Equals(object other)
+        {
+            if (other is <#= Model.Name #> o)
+                return this.Equals(o);
+
+            return false;
+        }
+    }
+}
